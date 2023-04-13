@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class CarGame {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String playerName;
+        int playerScore = 0;
+        boolean playAgain = true;
+
+        System.out.println("Welcome to the Car Game!");
+        System.out.print("Enter your name: ");
+        playerName = scanner.nextLine();
+        System.out.println("Hello, " + playerName + "! Let's start the game.");
+
+        while (playAgain) {
+            int randomNumber = (int) (Math.random() * 10 + 1);
+            int guess;
+            int attempts = 0;
+
+            System.out.println("Guess the number between 1 and 10:");
+            while (true) {
+                System.out.print("Enter your guess: ");
+                guess = scanner.nextInt();
+                attempts++;
+
+                if (guess < randomNumber) {
+                    System.out.println("Higher! Guess again.");
+                } else if (guess > randomNumber) {
+                    System.out.println("Lower! Guess again.");
+                } else {
+                    System.out.println("Congratulations, " + playerName + "! You guessed the correct number (" + guess + ") in " + attempts + " attempts.");
+                    playerScore++;
+                    break;
+                }
+
+                if (attempts >= 3) {
+                    System.out.println("Oops! You couldn't guess the correct number. The correct number was: " + randomNumber);
+                    break;
+                }
+            }
+
+            System.out.print("Do you want to play again? (yes/no): ");
+            String playAgainInput = scanner.next();
+            playAgain = playAgainInput.equalsIgnoreCase("yes");
+        }
+
+        System.out.println("Thank you for playing, " + playerName + "! Your total score is: " + playerScore);
+        scanner.close();
+    }
+}
